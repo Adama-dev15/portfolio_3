@@ -1,47 +1,6 @@
-import isotope from "isotope-layout";
 import React from "react";
-import { useEffect } from "react";
-//import Isotope from "isotope-layout";
 
 const PortfolioView = () => {
-  const handlePortfolioWaypointEnter = () => {
-    const portfolioContainer = document.querySelector(".portfolio-container");
-
-    if (!portfolioContainer) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        const portfolioIsotope = new isotope(".portfolio-container", {
-          itemSelector: ".portfolio-item",
-          layoutMode: "fitRows",
-        });
-
-        document.querySelectorAll("#portfolio-flters li").forEach((filter) => {
-          filter.addEventListener("click", function () {
-            document
-              .querySelectorAll("#portfolio-flters li")
-              .forEach((filter) => {
-                filter.classList.remove("active");
-              });
-            this.classList.add("active");
-
-            portfolioIsotope.arrange({
-              filter: this.getAttribute("data-filter"),
-            });
-          });
-        });
-
-        observer.disconnect();
-      }
-    });
-
-    observer.observe(portfolioContainer);
-  };
-
-  useEffect(() => {
-    handlePortfolioWaypointEnter();
-  }, []);
-
   return (
     <div>
       <section id="portfolio" className="portfolio">
@@ -49,19 +8,6 @@ const PortfolioView = () => {
           <div className="section-title">
             <h2>Portfolio</h2>
             <p>My Works</p>
-          </div>
-
-          <div className="row">
-            <div className="col-lg-12 d-flex justify-content-center">
-              <ul id="portfolio-flters">
-                <li data-filter="*" className="filter-active">
-                  All
-                </li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-card">Card</li>
-                <li data-filter=".filter-web">Web</li>
-              </ul>
-            </div>
           </div>
 
           <div className="row portfolio-container">
